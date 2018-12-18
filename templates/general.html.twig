@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <meta chatset="UTF-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <title>{%block title%}Bienvenu{%endblock%}</title>
+        {%block stylesheet%}{%endblock%}
+    </head>
+    <body>
+         <nav class="navbar navbar-expand-lg navbar-light bg-light" style="
+            position: fixed; width:100%; z-index:1;">
+             <div class="collapse navbar-collapse" id="navbarText">
+               <ul class="navbar-nav mr-auto">
+               <li class="nav-item active">
+               <a class="nav-link" href="/projects/">Home
+               <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+              <a class="nav-link" href="/user/tickets">Your Tickets</a>
+              </li>
+              <li class="nav-item">
+              <a class="nav-link" href="/user/projects">Your Projects</a>
+              </li>
+              </ul>
+              <form class="form-inline pull-xs-right"style="top:100 px">
+                  <input class="form-control" type="text" placeholder="Tag Search">
+                  <button class="btn btn-outline-success" type="submit">Search</button>
+              </form>
+              <span class="navbar-text"><a href="/logout">Exit</a></span>
+            </div>
+            {%block nav%}{%endblock%}
+          </nav>
+
+        <!-- menu -->
+        <div class="container" style="position: relative; top: 100px;">
+            {%block body%}{%endblock%}
+        </div>
+        <!-- footer -->
+    </body>
+</html>

@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+            <center>
+                {%for message in app.flashes('user_not_create')%}
+                    <div class="alert alert-danger" role="alert">
+                        {{message}}
+                    </div>
+                {%endfor%}
+                <div class="col-sm-6">
+                    <h2>Registration</h2>
+                    {{ form_start(form) }}
+                        {{form_widget(form.username, {'attr':{'class':'form-control', 'placeholder':'Your Login'}})}}
+                        {{form_widget(form.password.first, {'attr':{'class':'form-control', 'placeholder':'Your Password'}})}}
+                        {{form_widget(form.password.second, {'attr':{'class':'form-control','placeholder':'Repeat Your Password'}})}}
+                        {{form_widget(form.Submit, {'attr':{'class':'btn btn-primary btn-lg btn-block'}})}}
+                    {{ form_end(form) }}
+                </div>
+            <center>
+        </div>
+    </body>
+</html>

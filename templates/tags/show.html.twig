@@ -1,0 +1,24 @@
+{%extends 'general.html.twig'%}
+{%block body%}
+    <h2>Поиск по тегу: {{tags.Name}}</h2>
+    <table class=table border=1>
+        <tr>
+            <th>Ticket ID</th>
+            <th>Name</th>
+            <th>Link</th>
+        </tr>
+        {%for key in tickets%}
+            <tr>
+                <th>
+                    {{key.Id}}
+                </th> 
+                <th>
+                    {{key.Name}}
+                </th>
+                <th>
+                    <a href="/projects/tickets/{{key.id}}">Go</a>
+                </th>
+            </tr>
+        {%endfor%}
+    </table>
+{%endblock%}

@@ -1,0 +1,26 @@
+{%extends 'general.html.twig'%}
+{%block title%}User projects{{user.username}}{%endblock%}
+{%block body%}
+    <center>
+        <h2>User projects table{{user.username}}</h2>
+    </center>
+    <table border=1 class="table">
+        <tr>
+            <th>ID</th>
+            <th>Usr_id</th>
+            <th>Name</th>
+            <th>Link</th>
+        </tr>
+        {%for key in projects%}
+            <tr>
+                <td>{{key.id}}</td>
+                <td>{{key.userid}}</td>
+                <td>{{key.name}}</td>
+                <td><a href="/projects/show/{{key.id}}">About</a></td>
+            </tr>
+        {%endfor%}
+    </table>
+    <a href="/projects/create">Create project</a>
+    <a href="/projects">Back</a>
+{%endblock%}
+

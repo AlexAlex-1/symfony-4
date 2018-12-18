@@ -1,0 +1,35 @@
+{%extends 'general.html.twig'%}
+{%block body%}
+    <center>
+        <h2>Edit ticket</h2>
+    </center>
+    {{form_start(form)}}
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Nom:</label>
+                {{form_widget(form.Name, {'attr':{'type':'text', 'class':'form-control', 'placeholder':
+                'Name', 'autofocus':'autofocus','required':'required'}})}}
+            </div>
+            <div class="form-group col-md-6">
+                <label>Description:</label>
+                {{form_widget(form.Description, {'attr':{'type':'text', 'class':'form-control',
+                'placeholder':'Description','required':'required','autofocus':'autofocus'}})}}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                {{form_widget(form.Status, {'attr':{'class':'form-control',
+                'id':'exampleInputPassword1', 'placeholder':'Creator','autofocus':'autofocus',
+                'required':'required'}})}}
+            </div>
+            <div class="form-group col-md-6">
+                {{form_widget(form.AssigneeId,{'attr':{'type':'text', 'class':'form-control',
+                'placeholder':'AssigneeId:','autofocus':'autofocus','required':'required'}})}}
+            </div>
+        </div>
+        <div class="form-group col-md-12">
+            {{form_widget(form.Submit,{'attr':{'class':'btn btn-primary btn-lg btn-block'}})}}
+        </div>
+        {{form_widget(form)}}
+    {{form_end(form)}}
+{%endblock%}

@@ -1,0 +1,38 @@
+{%extends 'general.html.twig'%}
+{%block title%}About this ticket{%endblock%}
+{%block body%}
+    <center>
+        {%for message in app.flashes('Error_Tag')%}
+            <div class="alert alert-danger" role="alert">
+                {{message}}
+            </div>
+        {%endfor%}
+    </center>
+    {{form_start(form)}}
+        <div class="form-group col-md-3">
+            {{form_widget(form.Name, {'attr':{'class':'form-control', 'value':'', 'placeholder':'Enter Tag:'}})}}
+            <input type="submit" style="display:none">
+        </div>
+    {{form_end(form)}}
+    <center>
+        <h3>Description of this ticket</h3>
+    </center>
+    <ul>
+        <li>ID: {{ticket.id}}</li>
+        <li>Name: {{ticket.name}}</li>
+        <li>Description: {{ticket.description}}</li>
+        <li>Project ID: {{ticket.projectid}}</li>
+        <li>Assignee ID: {{ticket.assigneeid}}</li>
+        <li>Statut: {{ticket.status}}</li>
+        <li>File: <a href="{{asset('files/'~ticket.File)}}" download>Download</a></li>
+    </ul>
+    <a href="/projects/show/{{ticket.projectid}}">Back</a>
+    {%if is_granted('EDIT', ticket)%}
+        <a href="/projects/tickets/del/{{ticket.id}}" class="text-danger" onclick="return confirm('Точно удалить?!')">Delete this ticket</a>
+        <a href="/projects/tickets/{{ticket.id}}/edit">Edit ticket</a>
+    {%endif%}<br>
+    <h3>Tags:</h3>
+    {%for tag in tags%}
+    <a href="/tags/{{tag.id}}">#{{tag.Name}}</a>
+    {%endfor%}
+{%endblock%}
