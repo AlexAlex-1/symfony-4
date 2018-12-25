@@ -46,5 +46,16 @@ class UserRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    */
+     */
+    public function findByTicket($ticket){
+        $query = $this->getEntityManager()->createQuery("
+        SELECT p
+        FROM App\Entity\User p
+        WHERE p.id =
+        (SELECT u.assignee_id
+        FROM App\Entity\Tickets u
+        WHERE u.id = $ticket)"
+        );
+        return $query->execute();
+    }
 }

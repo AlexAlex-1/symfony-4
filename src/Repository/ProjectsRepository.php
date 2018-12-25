@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Tickets;
 use App\Entity\Projects;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -46,5 +47,16 @@ class ProjectsRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    */
+     */
+    public function findByTicket($ticket){
+        $query = $this->getEntityManager()->createQuery("
+        SELECT p
+        FROM App\Entity\Projects p
+        WHERE p.id = 
+        (SELECT t.project_id
+        FROM App\Entity\Tickets t
+        WHERE t.id = $ticket)"
+        );
+    return $query->execute();
+    }
 }

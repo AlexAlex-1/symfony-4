@@ -60,5 +60,15 @@ class TagsRepository extends ServiceEntityRepository
             WHERE k.id = $tickets"
             );
             return $query->execute();
-    } 
+    }
+    public function findByString($string){
+        $query = $this->getEntityManager()->createQuery(
+            "SELECT p
+            FROM App\Entity\Tags p
+            WHERE p.Name
+            LIKE :$string"
+        );
+        $query->setParameter($string, "$string%");
+        return $query->execute();
+    }
 }

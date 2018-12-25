@@ -64,7 +64,7 @@ class ProjectsController extends AbstractController
         return $this->render('projects/create.html.twig', [
             'user'=>$user,
             'project' => $project,
-            'form' => $form->createView(),
+            'formProject' => $form->createView(),
         ]);
     }
     /**

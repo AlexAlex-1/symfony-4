@@ -33,25 +33,27 @@ class TicketVoter extends Voter
 
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
+        $user = $token->getUser();
+        if ($this->decisionManager->decide($token, array('ROLE_ADMIN'))){
+            return true;
+        }
+        if (!$user instanceof User) {
+            return false;
+        }
 
-    $user = $token->getUser();
-    if (!$user instanceof User) {
+        $post = $subject;
+
+        switch ($attribute) {
+            case 'EDIT':
+                return $this->canEdit($post, $user);
+        }
+
         return false;
-    }
-      
-    $post = $subject;
-     
-    switch ($attribute) {
-        case 'EDIT':
-        return $this->canEdit($post, $user);
-    }
-      
-    return false;
-      
-    throw new \LogicException('This code should not be reached!');
-    if ($this->decisionManager->decide($token, array('ROLE_ADMIN'))) {
-        return true;
-    }
+        
+        throw new \LogicException('This code should not be reached!');
+        if ($this->decisionManager->decide($token, array('ROLE_ADMIN'))) {
+            return true;
+        }
     }
      
     private function canView(Post $post, User $user)
