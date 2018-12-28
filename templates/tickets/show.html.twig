@@ -7,23 +7,14 @@
                 {{message}}
             </div>
         {%endfor%}
-    </center>
-    {{form_start(form)}}
-        <div class="form-group col-md-3">
-            {{form_widget(form.Name, {'attr':{'class':'form-control', 'value':'', 'placeholder':'Enter Tag:'}})}}
-            <input type="submit" style="display:none">
-        </div>
-    {{form_end(form)}}
-    <center>
         <h3>Description of this ticket</h3>
     </center>
     <ul>
-        <li>ID: {{ticket.id}}</li>
         <li>Name: {{ticket.name}}</li>
         <li>Description: {{ticket.description}}</li>
-        <li>Project ID: {{ticket.projectid}}</li>
-        <li>Assignee ID: {{ticket.assigneeid}}</li>
-        <li>Statut: {{ticket.status}}</li>
+        <li>Project: <a href="/projects/show/{{project.0.id}}">{{project.0.name}}</a></li>
+        <li>Assignee: {{assignee.0.username}}</li>
+        <li>Status: {{ticket.status}}</li>
         <li>File: <a href="{{asset('files/'~ticket.File)}}" download>Download</a></li>
     </ul>
     <a href="/projects/show/{{ticket.projectid}}">Back</a>

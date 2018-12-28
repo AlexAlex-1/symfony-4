@@ -3,16 +3,16 @@
     <center>
         <div class="form-group col-md-5">
             <h2>Create Project</h2>
-            {{form_start(form)}}
+            {{form_start(formProject)}}
                 <div class="form-group col-md-12">
-                    {{form_widget(form.Name, {'attr':{'placeholder':'Name:', 'autofocus':'on',
+                    {{form_widget(formProject.Name, {'attr':{'placeholder':'Name:', 'autofocus':'on',
                     'class':'form-control'}})}}
                 </div>
                 <div class="form-group col-md-12">
-                    {{form_widget(form.Submit, {'attr':{'class':'btn btn-primary btn-lg btn-block'}})}}
+                    {{form_widget(formProject.Submit, {'attr':{'class':'btn btn-primary btn-lg btn-block'}})}}
                 </div>
-                {{form_errors(form)}}
-            {{form_end(form)}}
+                {{form_errors(formProject)}}
+            {{form_end(formProject)}}
         </div>
     </center>
 {%endblock%}

@@ -1,0 +1,76 @@
+{%extends 'general.html.twig'%}
+{%block body%}
+<div class="search_area">
+<form class="form-inline pull-xs-right"style="top:100 px" action="{{path('search')}}"method="POST">
+{{form_start(form)}}
+{{form_widget(form.Name, {'attr':{'name':'mom','class':'form-control','autocomplete':'off', 'type':'text','placeholder':'Tag Search', 'id':'search'}})}}
+{{form_widget(form.Submit, {'attr':{'class':'btn btn-outline-success', 'style':'display:none;'}})}}<br>
+<div class="invalid-feedback" id="error" style="display:none; width:10px;">
+</div>
+<div id="sresult" class="search-result" style="display:none"></div>
+</div>
+{{form_end(form)}}
+</div>
+<!--<script>
+$(document).ready(function(){
+$('#search').keyup(function(){
+    var rechercher = $(this).val();
+    var elem = document.getElementById('sresult');
+    elem.style.display = "block";
+    $('#sresult').text("wewe");
+
+});    
+});
+</script>-->
+<script>
+$(document).ready(function(){
+        $("#seacrh_Name").keydown(function(event){
+        if(event.keyCode == 13) {
+          event.preventDefault();
+          return false;
+      }
+   });
+    $("#seacrh_Name").text("");
+    $("#seacrh_Name").keyup(function(){
+    $("#sresult").html("");
+    if ($("#seacrh_Name").val() == ""){
+       var input = document.getElementById("seacrh_Name");
+       input.setAttribute('class',"form-control is-invalid");
+       $("#error").text("Строка пуста!");
+       document.getElementById("error").style.display = "block";
+    }
+    else{
+        document.getElementById("seacrh_Name").setAttribute('class', "form-control");
+    }
+    var elem = document.getElementById('sresult');
+    var te = $(this).val();
+    if (te.length > 0){
+        $.ajax({
+            type:"POST",
+            url:"{{path('processing')}}",
+            data:{"seacrhName":te},
+            success: function(response){
+                var responsE = JSON.parse(response);
+                elem.style.display = "block";
+                var tt = responsE.length;
+                if (responsE.length == 0){
+                    document.getElementById("seacrh_Name").setAttribute('class', "form-control is-invalid");
+                    $("#error").text("Такого тега нет!");
+                    document.getElementById("error").style.display = "block";
+                }
+                else{
+                    document.getElementById("error").style.display = "none";
+                }
+                for(var i = 0; i < responsE.length; i++){
+                    var create = document.createElement('div');
+                var element = responsE[i];
+                document.getElementById("sresult").innerHTML += ""+element.name+"";
+                }
+            }
+        });
+    }
+
+});
+});
+</script>
+{%endblock%}

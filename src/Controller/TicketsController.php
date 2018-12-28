@@ -187,16 +187,21 @@ class TicketsController extends AbstractController
                     $tics = $this->getDoctrine()->getRepository(TicketsTags::class)->findBy(['Ticket_id'=>$id]);
                     // var_dump($tics);
 
+                    // newTagId found?
+                    $tagFound = false;
                     foreach ($tics as $key => $value) {
                         $tagId_ticket = $value->getTagId();
                         if ($newTagId == $tagId_ticket) {
-                            $this->addFlash(
-                                'Error_Tag',
-                                'Такой тег у тикета существует!'
-                            );
-                            return $this->redirectToRoute("ticket_show", ['id'=>$id]);
-                        }
-
+                            $tagFound = true;
+                            // $this->addFlash(
+                            //     'Error_Tag',
+                            //     'Такой тег у тикета существует!'
+                            // );
+                            // return $this->redirectToRoute("ticket_show", ['id'=>$id]);
+                        } 
+                    }
+                    // if newTagId not found:
+                    if (!$tagFound) {
                         $ticTag = new TicketsTags();
                         $ticTag->setTicketId($id);
                         $ticTag->setTagId($newTagId);
@@ -204,7 +209,6 @@ class TicketsController extends AbstractController
                         $save->persist($ticTag);
                         $save->flush();
                     }
-
                 }
             }
             $this->getDoctrine()->getManager()->flush();
